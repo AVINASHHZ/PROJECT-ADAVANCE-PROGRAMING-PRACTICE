@@ -695,13 +695,15 @@ public class StandaloneServer {
         }
     }
 
+    private static final ExecutorService wsExecutor = Executors.newCachedThreadPool();
+
     private static void startWebSocketListener(int port) {
         Thread serverThread = new Thread(() -> {
             try (java.net.ServerSocket ss = new java.net.ServerSocket(port)) {
                 System.out.println("[WebSocket] RFC 6455 Engine listening on ws://localhost:" + port + "/ws/combat");
                 while (!ss.isClosed()) {
                     java.net.Socket socket = ss.accept();
-                    Executors.newVirtualThreadPerTaskExecutor().execute(() -> handleWsConnection(socket));
+                    wsExecutor.execute(() -> handleWsConnection(socket));
                 }
             } catch (Exception e) {
                 System.err.println("[WebSocket] Listener error: " + e.getMessage());
