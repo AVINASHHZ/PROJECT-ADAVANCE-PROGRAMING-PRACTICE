@@ -413,9 +413,49 @@
     margin-top: 4px;
   }
 
-  /* ==================== BOTTOM WEAPON & KEYCAP BAR (REMOVED) ==================== */
+  /* ==================== BOTTOM CONTROLS & KEYCAP BAR ==================== */
   #bottom-bar {
-    display: none !important;
+    position: absolute;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 6px 16px;
+    background: rgba(10, 8, 14, 0.88);
+    border: 1.5px solid rgba(246, 211, 101, 0.45);
+    border-radius: 24px;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.8), 0 0 14px rgba(255, 107, 0, 0.2);
+    z-index: 25;
+    pointer-events: auto;
+    white-space: nowrap;
+    max-width: 96vw;
+    overflow-x: auto;
+  }
+
+  .sf-ctrl-toggle {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: rgba(18, 14, 24, 0.9);
+    border: 1.5px solid rgba(246, 211, 101, 0.6);
+    color: #f6d365;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin-top: 4px;
+    transition: transform 0.15s, background 0.15s;
+    pointer-events: auto;
+  }
+  .sf-ctrl-toggle:hover {
+    transform: scale(1.1);
+    background: rgba(255, 107, 0, 0.35);
   }
 
   .ctrl-item {
@@ -1934,8 +1974,7 @@
     display: none !important;
   }
 
-  #quick-toolbar,
-  #bottom-bar {
+  #quick-toolbar {
     display: none !important;
   }
 
@@ -6401,13 +6440,16 @@
       </div>
     </div>
 
-    <!-- CENTER TIMER & PAUSE -->
+    <!-- CENTER TIMER & PAUSE & CONTROLS -->
     <div class="hud-center">
       <div class="sf-timer" id="match-timer">99</div>
-      <button class="sf-pause-circle" id="btn-pause" title="Arsenal & Pause (P / Esc)">
-        <span class="pause-bar"></span>
-        <span class="pause-bar"></span>
-      </button>
+      <div style="display:flex;gap:6px;align-items:center;">
+        <button class="sf-pause-circle" id="btn-pause" title="Arsenal & Pause (P / Esc)">
+          <span class="pause-bar"></span>
+          <span class="pause-bar"></span>
+        </button>
+        <button class="sf-ctrl-toggle" id="btn-toggle-touch" title="Toggle On-Screen Touch Controls">🎮</button>
+      </div>
     </div>
 
     <!-- RIGHT: KID / RONIN (OPPONENT) -->
@@ -6477,15 +6519,15 @@
 
   <!-- COMPACT INTERACTIVE KEYCAP BAR -->
   <footer id="bottom-bar">
-    <div class="ctrl-item"><span class="kcap" data-bind="left">A</span><span class="kcap" data-bind="right">D</span> Walk / Run to Corners</div>
-    <div class="ctrl-item"><span class="kcap" data-bind="up">W</span> Jump</div>
-    <div class="ctrl-item"><span class="kcap" data-bind="down">S</span> Crouch</div>
-    <div class="ctrl-item"><span class="kcap" data-bind="roll">Shift</span> Roll / Flip</div>
-    <div class="ctrl-item"><span class="kcap" data-bind="guard">Space</span> Guard / Parry</div>
-    <div class="ctrl-item"><span class="kcap" data-bind="slash">J</span> Weapon Strike</div>
-    <div class="ctrl-item"><span class="kcap" data-bind="heavy">K</span> Heavy / Special</div>
-    <div class="ctrl-item"><span class="kcap" data-bind="kick">L</span> Martial Kick</div>
-    <div class="ctrl-item"><span class="kcap" data-bind="shadow">U</span> Shadow Magic</div>
+    <div class="ctrl-item"><span class="kcap" data-bind="left">A / ◄</span><span class="kcap" data-bind="right">D / ►</span> Move</div>
+    <div class="ctrl-item"><span class="kcap" data-bind="up">W / ▲</span> Jump</div>
+    <div class="ctrl-item"><span class="kcap" data-bind="down">S / ▼</span> Crouch</div>
+    <div class="ctrl-item"><span class="kcap" data-bind="roll">Shift / Q</span> Roll</div>
+    <div class="ctrl-item"><span class="kcap" data-bind="guard">Space / B</span> Guard</div>
+    <div class="ctrl-item"><span class="kcap" data-bind="slash">J / Z (Click)</span> Strike</div>
+    <div class="ctrl-item"><span class="kcap" data-bind="heavy">K / X</span> Heavy</div>
+    <div class="ctrl-item"><span class="kcap" data-bind="kick">L / C</span> Kick</div>
+    <div class="ctrl-item"><span class="kcap" data-bind="shadow">U / V</span> Magic</div>
   </footer>
 
   <!-- MOBILE TOUCH CONTROLS -->
@@ -12980,9 +13022,37 @@
 
   function focusGame() {
     window.focus();
-    canvas.focus({ preventScroll: true });
+    if (document.activeElement && document.activeElement !== canvas && typeof document.activeElement.blur === 'function') {
+      document.activeElement.blur();
+    }
+    if (canvas && canvas.focus) {
+      canvas.focus({ preventScroll: true });
+    }
   }
-  window.addEventListener('pointerdown', () => { focusGame(); sfx.init(); });
+  window.addEventListener('pointerdown', (e) => {
+    if (!e.target.closest('button, input, select, .opt-card, .t-btn, .kcap')) {
+      focusGame();
+      sfx.init();
+    }
+  });
+
+  // Canvas Mouse Combat Controls (Left Click = Slash, Right Click = Heavy)
+  if (canvas) {
+    canvas.addEventListener('click', (e) => {
+      focusGame();
+      sfx.init();
+      if (typeof match !== 'undefined' && match.state === 'FIGHT' && !match.paused && typeof p1 !== 'undefined' && p1.canAct()) {
+        handlePlayerAction('slash');
+      }
+    });
+    canvas.addEventListener('contextmenu', (e) => {
+      e.preventDefault();
+      focusGame();
+      if (typeof match !== 'undefined' && match.state === 'FIGHT' && !match.paused && typeof p1 !== 'undefined' && p1.canAct()) {
+        handlePlayerAction('heavy');
+      }
+    });
+  }
 
   function showBanner(main, sub = '', dur = 1.1) {
     const el = document.getElementById('announcer-banner');
@@ -13158,7 +13228,7 @@
         campaign.endDialogue();
         return;
       }
-      if (code === 'Space' || code === 'Enter') {
+      if (code === 'Space' || code === 'Enter' || key === ' ' || code === 'KeyJ' || code === 'KeyZ') {
         e.preventDefault();
         campaign.advanceDialogue();
         return;
@@ -13186,21 +13256,26 @@
       return;
     }
 
-    if (code === 'KeyA' || code === 'ArrowLeft' || key === 'a') {
+    // MOVEMENT: Left (A or ArrowLeft)
+    if (code === 'KeyA' || code === 'ArrowLeft' || key === 'a' || key === 'arrowleft') {
       input.left = true;
       const now = performance.now();
       if (lastTapDir === -1 && now - lastTapTime < 240 && p1.canAct() && p1.y === 0) {
         p1.triggerRoll(-1);
       }
       lastTapDir = -1; lastTapTime = now;
-    } else if (code === 'KeyD' || code === 'ArrowRight' || key === 'd') {
+    }
+    // MOVEMENT: Right (D or ArrowRight)
+    else if (code === 'KeyD' || code === 'ArrowRight' || key === 'd' || key === 'arrowright') {
       input.right = true;
       const now = performance.now();
       if (lastTapDir === 1 && now - lastTapTime < 240 && p1.canAct() && p1.y === 0) {
         p1.triggerRoll(1);
       }
       lastTapDir = 1; lastTapTime = now;
-    } else if (code === 'KeyW' || code === 'ArrowUp' || key === 'w') {
+    }
+    // MOVEMENT: Jump (W or ArrowUp)
+    else if (code === 'KeyW' || code === 'ArrowUp' || key === 'w' || key === 'arrowup') {
       input.up = true;
       if (p1.canAct() && p1.y === 0 && !match.paused) {
         p1.vy = -660;
@@ -13208,26 +13283,40 @@
         p1.startState('JUMP');
         sfx.play('whoosh');
       }
-    } else if (code === 'KeyS' || code === 'ArrowDown' || key === 's') {
+    }
+    // MOVEMENT: Crouch (S or ArrowDown)
+    else if (code === 'KeyS' || code === 'ArrowDown' || key === 's' || key === 'arrowdown') {
       input.down = true;
-    } else if (code === 'Space' || key === ' ') {
+    }
+    // GUARD / BLOCK: Space or B
+    else if (code === 'Space' || key === ' ' || code === 'KeyB' || key === 'b') {
       input.guard = true;
       if (p1.canAct() && p1.y === 0) {
         p1.startState('BLOCK');
         p1.parryWindow = 0.16;
         p1.vx = 0;
       }
-    } else if (code === 'ShiftLeft' || code === 'ShiftRight' || key === 'shift') {
+    }
+    // ROLL: Shift or Q or E
+    else if (code === 'ShiftLeft' || code === 'ShiftRight' || key === 'shift' || code === 'KeyQ' || key === 'q' || code === 'KeyE' || key === 'e') {
       if (p1.canAct() && p1.y === 0 && !match.paused) {
         p1.triggerRoll(input.left ? -1 : (input.right ? 1 : p1.facing));
       }
-    } else if (code === 'KeyJ' || key === 'j') {
+    }
+    // ATTACK: Strike / Slash (J or Z or F)
+    else if (code === 'KeyJ' || key === 'j' || code === 'KeyZ' || key === 'z' || code === 'KeyF' || key === 'f') {
       handlePlayerAction('slash');
-    } else if (code === 'KeyK' || key === 'k') {
+    }
+    // ATTACK: Heavy (K or X or G)
+    else if (code === 'KeyK' || key === 'k' || code === 'KeyX' || key === 'x' || code === 'KeyG' || key === 'g') {
       handlePlayerAction('heavy');
-    } else if (code === 'KeyL' || key === 'l') {
+    }
+    // ATTACK: Kick (L or C or H)
+    else if (code === 'KeyL' || key === 'l' || code === 'KeyC' || key === 'c' || code === 'KeyH' || key === 'h') {
       handlePlayerAction('kick');
-    } else if (code === 'KeyU' || key === 'u') {
+    }
+    // ATTACK: Magic / Shadow Art (U or V or R)
+    else if (code === 'KeyU' || key === 'u' || code === 'KeyV' || key === 'v' || code === 'KeyR' || key === 'r') {
       handlePlayerAction('shadow');
     }
   }, { passive: false });
@@ -13235,11 +13324,11 @@
   window.addEventListener('keyup', (e) => {
     const code = e.code || '';
     const key = (e.key || '').toLowerCase();
-    if (code === 'KeyA' || code === 'ArrowLeft' || key === 'a') input.left = false;
-    if (code === 'KeyD' || code === 'ArrowRight' || key === 'd') input.right = false;
-    if (code === 'KeyW' || code === 'ArrowUp' || key === 'w') input.up = false;
-    if (code === 'KeyS' || code === 'ArrowDown' || key === 's') input.down = false;
-    if (code === 'Space' || key === ' ') {
+    if (code === 'KeyA' || code === 'ArrowLeft' || key === 'a' || key === 'arrowleft') input.left = false;
+    if (code === 'KeyD' || code === 'ArrowRight' || key === 'd' || key === 'arrowright') input.right = false;
+    if (code === 'KeyW' || code === 'ArrowUp' || key === 'w' || key === 'arrowup') input.up = false;
+    if (code === 'KeyS' || code === 'ArrowDown' || key === 's' || key === 'arrowdown') input.down = false;
+    if (code === 'Space' || key === ' ' || code === 'KeyB' || key === 'b') {
       input.guard = false;
       if (p1.state === 'BLOCK') p1.startState('IDLE');
     }
@@ -13249,16 +13338,20 @@
   document.querySelectorAll('[data-bind]').forEach(el => {
     const act = el.getAttribute('data-bind');
     const down = (ev) => {
-      ev.preventDefault();
+      if (ev && ev.cancelable) ev.preventDefault();
       focusGame();
+      if (ev && ev.pointerId && el.setPointerCapture) {
+        try { el.setPointerCapture(ev.pointerId); } catch(err) {}
+      }
       el.classList.add('pressed', 'active-key');
       if (act === 'left') input.left = true;
       else if (act === 'right') input.right = true;
       else if (act === 'down') input.down = true;
       else if (act === 'up') {
-        if (p1.canAct() && p1.y === 0) { p1.vy = -660; p1.y = -1; p1.startState('JUMP'); }
+        input.up = true;
+        if (p1.canAct() && p1.y === 0 && !match.paused) { p1.vy = -660; p1.y = -1; p1.startState('JUMP'); sfx.play('whoosh'); }
       } else if (act === 'roll') {
-        if (p1.canAct() && p1.y === 0) p1.triggerRoll(input.left ? -1 : (input.right ? 1 : p1.facing));
+        if (p1.canAct() && p1.y === 0 && !match.paused) p1.triggerRoll(input.left ? -1 : (input.right ? 1 : p1.facing));
       } else if (act === 'guard') {
         input.guard = true;
         if (p1.canAct() && p1.y === 0) { p1.startState('BLOCK'); p1.parryWindow = 0.16; p1.vx = 0; }
@@ -13267,11 +13360,12 @@
       }
     };
     const up = (ev) => {
-      ev.preventDefault();
+      if (ev && ev.cancelable) ev.preventDefault();
       el.classList.remove('pressed', 'active-key');
       if (act === 'left') input.left = false;
       else if (act === 'right') input.right = false;
       else if (act === 'down') input.down = false;
+      else if (act === 'up') input.up = false;
       else if (act === 'guard') {
         input.guard = false;
         if (p1.state === 'BLOCK') p1.startState('IDLE');
@@ -13279,8 +13373,9 @@
     };
     el.addEventListener('pointerdown', down);
     el.addEventListener('pointerup', up);
-    el.addEventListener('pointerleave', up);
     el.addEventListener('pointercancel', up);
+    el.addEventListener('touchstart', down, { passive: false });
+    el.addEventListener('touchend', up, { passive: false });
   });
 
   function updatePlayerLocomotion() {
@@ -14637,14 +14732,40 @@
       const hud = document.getElementById('sf2-hud');
       const toolbar = document.getElementById('quick-toolbar');
       const bbar = document.getElementById('bottom-bar');
+      const tctrl = document.getElementById('touch-controls');
       if (hud) hud.style.display = 'flex';
       if (toolbar) toolbar.style.display = 'none';
-      if (bbar) bbar.style.display = 'none';
 
-      if (this.settings.touchMode === 'always' || (this.settings.touchMode === 'auto' && ('ontouchstart' in window || navigator.maxTouchPoints > 0))) {
-        const tctrl = document.getElementById('touch-controls');
-        if (tctrl) tctrl.style.display = 'flex';
+      const isTouch = ('ontouchstart' in window || navigator.maxTouchPoints > 0 || window.innerWidth <= 1024);
+      if (this.settings.touchMode === 'always' || (this.settings.touchMode === 'auto' && isTouch)) {
+        if (tctrl) {
+          tctrl.style.display = 'flex';
+          tctrl.classList.add('enabled');
+        }
+        if (bbar) bbar.style.display = 'none';
+      } else {
+        if (bbar) bbar.style.display = 'flex';
+        if (tctrl) tctrl.style.display = 'none';
       }
+
+      const btnToggle = document.getElementById('btn-toggle-touch');
+      if (btnToggle && !btnToggle._bound) {
+        btnToggle._bound = true;
+        btnToggle.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const curTouch = tctrl && (tctrl.style.display === 'flex' || tctrl.classList.contains('enabled'));
+          if (curTouch) {
+            if (tctrl) { tctrl.style.display = 'none'; tctrl.classList.remove('enabled'); }
+            if (bbar) bbar.style.display = 'flex';
+          } else {
+            if (tctrl) { tctrl.style.display = 'flex'; tctrl.classList.add('enabled'); }
+            if (bbar) bbar.style.display = 'none';
+          }
+          focusGame();
+        });
+      }
+
+      focusGame();
     }
 
     startDuel(levelNum) {
