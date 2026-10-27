@@ -1,0 +1,300 @@
+{
+  "version": "1.0.0",
+  "campaign": "SHADOW REQUIEM: THE FIFTEEN SEALS",
+  "environments": [
+    {
+      "id": "ashen_forest",
+      "level": 1,
+      "chapter": 1,
+      "name": "Ashen Forest",
+      "file": "assets/environments/level01_ashen_forest_bg.webp",
+      "fallbackColor": "#13161c",
+      "description": "Silent moonlit bamboo and pine forest shrouded in pale drifting volcanic ash."
+    },
+    {
+      "id": "abandoned_village",
+      "level": 2,
+      "chapter": 1,
+      "name": "Abandoned Village",
+      "file": "assets/environments/level02_abandoned_village_bg.webp",
+      "fallbackColor": "#2a1209",
+      "description": "Burning minka settlement consumed by fire, embers rising into a blood-orange twilight."
+    },
+    {
+      "id": "crimson_dojo",
+      "level": 3,
+      "chapter": 1,
+      "name": "Crimson Dojo",
+      "file": "assets/environments/level03_crimson_dojo_bg.webp",
+      "fallbackColor": "#320b0b",
+      "description": "Sacred martial dojo with red lacquered pillars, shoji screens, and golden lanterns."
+    },
+    {
+      "id": "sunken_prison",
+      "level": 4,
+      "chapter": 2,
+      "name": "Sunken Prison",
+      "file": "assets/environments/level04_sunken_prison_bg.webp",
+      "fallbackColor": "#0b171c",
+      "description": "Subterranean catacombs with moss-covered stone vaults, hanging iron gibbets, and cold puddles."
+    },
+    {
+      "id": "temple_of_embers",
+      "level": 5,
+      "chapter": 2,
+      "name": "Temple of Embers",
+      "file": "assets/environments/level05_temple_of_embers_bg.webp",
+      "fallbackColor": "#3b1104",
+      "description": "Mountaintop monastery surrounded by blazing ceremonial braziers and magma fissures."
+    },
+    {
+      "id": "frozen_pass",
+      "level": 6,
+      "chapter": 2,
+      "name": "Frozen Pass",
+      "file": "assets/environments/level06_frozen_pass_bg.webp",
+      "fallbackColor": "#0a1926",
+      "description": "Snowbound mountain ridge battered by blizzard winds beneath jagged icy crags."
+    },
+    {
+      "id": "azure_fortress",
+      "level": 7,
+      "chapter": 3,
+      "name": "Azure Fortress",
+      "file": "assets/environments/level07_azure_fortress_bg.webp",
+      "fallbackColor": "#071c29",
+      "description": "Moonlit ninja stronghold surrounded by sapphire paper lanterns and swirling cherry blossoms."
+    },
+    {
+      "id": "black_market",
+      "level": 8,
+      "chapter": 3,
+      "name": "Black Market",
+      "file": "assets/environments/level08_black_market_bg.webp",
+      "fallbackColor": "#190e24",
+      "description": "Underground smuggler alleys lit by deep violet lanterns, incense smoke, and relic stalls."
+    },
+    {
+      "id": "blood_arena",
+      "level": 9,
+      "chapter": 3,
+      "name": "Blood Arena",
+      "file": "assets/environments/level09_blood_arena_bg.webp",
+      "fallbackColor": "#290c0c",
+      "description": "Iron-fenced colosseum courtyard stained with crimson sands under a brutal sunset."
+    },
+    {
+      "id": "shrine_of_echoes",
+      "level": 10,
+      "chapter": 4,
+      "name": "Shrine of Echoes",
+      "file": "assets/environments/level10_shrine_of_echoes_bg.webp",
+      "fallbackColor": "#1c1228",
+      "description": "Fractured ancient sacred shrine with floating torii fragments and glowing ethereal soul wisps."
+    },
+    {
+      "id": "drowned_city",
+      "level": 11,
+      "chapter": 4,
+      "name": "Drowned City",
+      "file": "assets/environments/level11_drowned_city_bg.webp",
+      "fallbackColor": "#061f22",
+      "description": "Submerged dynasty palace ruins reflecting neon-turquoise waters beneath gentle rainfall."
+    },
+    {
+      "id": "obsidian_citadel",
+      "level": 12,
+      "chapter": 4,
+      "name": "Obsidian Citadel",
+      "file": "assets/environments/level12_obsidian_citadel_bg.webp",
+      "fallbackColor": "#170a1a",
+      "description": "Imperial fortress of the False Shogun forged from black volcanic glass under storm skies."
+    },
+    {
+      "id": "void_gate",
+      "level": 13,
+      "chapter": 5,
+      "name": "Void Gate",
+      "file": "assets/environments/level13_void_gate_bg.webp",
+      "fallbackColor": "#150621",
+      "description": "Torn fabric of reality revealing the abyss portal pulsating with spectral violet energy."
+    },
+    {
+      "id": "throne_of_shadows",
+      "level": 14,
+      "chapter": 5,
+      "name": "Throne of Shadows",
+      "file": "assets/environments/level14_throne_of_shadows_bg.webp",
+      "fallbackColor": "#08040d",
+      "description": "The Hollow King's monolith sanctum where living shadows crawl across obsidian pillars."
+    },
+    {
+      "id": "end_of_time",
+      "level": 15,
+      "chapter": 5,
+      "name": "End of Time",
+      "file": "assets/environments/lvl15.png",
+      "fallbackColor": "#0a0714",
+      "description": "A shattered plane beyond the world where fractured memory mirrors reflect infinite destinies."
+    }
+  ],
+  "bosses": [
+    {
+      "level": 1,
+      "id": "goro",
+      "name": "Goro",
+      "title": "The Exiled Blade",
+      "file": "assets/portraits/boss_goro_portrait.webp",
+      "weapon": "Iron Katana",
+      "combatStyle": "Heavy, readable two-handed katana slashes with high guard crushing power."
+    },
+    {
+      "level": 2,
+      "id": "kiba",
+      "name": "Kiba",
+      "title": "The Blood Hound",
+      "file": "assets/portraits/boss_kiba_portrait.webp",
+      "weapon": "Twin Daggers",
+      "combatStyle": "Lean predatory assassin with swift forward rolls and rapid multi-stab flurries."
+    },
+    {
+      "level": 3,
+      "id": "ren",
+      "name": "Master Ren",
+      "title": "The Silent Master",
+      "file": "assets/portraits/boss_ren_portrait.webp",
+      "weapon": "Quarterstaff & Fist",
+      "combatStyle": "Elderly martial grandmaster utilizing patient stance, counter-attacks, and defensive parries."
+    },
+    {
+      "level": 4,
+      "id": "dreadmaw",
+      "name": "Dreadmaw",
+      "title": "The Chain Warden",
+      "file": "assets/portraits/boss_dreadmaw_portrait.webp",
+      "weapon": "Chain Blade",
+      "combatStyle": "Towering iron jailer swinging heavy chain scythes for devastating screen-wide control."
+    },
+    {
+      "level": 5,
+      "id": "soryu",
+      "name": "Lady Soryu",
+      "title": "The Flame Widow",
+      "file": "assets/portraits/boss_soryu_portrait.webp",
+      "weapon": "Ember Katana",
+      "combatStyle": "Relentless aggression with blazing flame-infused thrusts and explosive blade sweeps."
+    },
+    {
+      "level": 6,
+      "id": "raik",
+      "name": "General Raik",
+      "title": "The Storm General",
+      "file": "assets/portraits/boss_raik_portrait.webp",
+      "weapon": "Storm Spear",
+      "combatStyle": "Disciplined military spear techniques, long piercing lunges, and sweeping anti-air vaults."
+    },
+    {
+      "level": 7,
+      "id": "shinobi",
+      "name": "Shinobi",
+      "title": "The Masked Rival",
+      "file": "assets/portraits/boss_shinobi_portrait.webp",
+      "weapon": "Azure Blades",
+      "combatStyle": "High acrobatics, wall rebounds, and fluid dual-blade combinations that mirror Kaze's cadence."
+    },
+    {
+      "level": 8,
+      "id": "vex",
+      "name": "Vex",
+      "title": "The Phantom Dealer",
+      "file": "assets/portraits/boss_vex_portrait.webp",
+      "weapon": "Phantom Daggers",
+      "combatStyle": "Tricky feints, deceptive smoke decoys, and unexpected low sweeping kicks."
+    },
+    {
+      "level": 9,
+      "id": "brutus",
+      "name": "Brutus",
+      "title": "The Iron Colossus",
+      "file": "assets/portraits/boss_brutus_portrait.webp",
+      "weapon": "Heavy Cleaver",
+      "combatStyle": "Armored juggernaut resisting flinch with heavy overhead cleaves and ground shockwaves."
+    },
+    {
+      "level": 10,
+      "id": "akari",
+      "name": "Akari (Shinobi)",
+      "title": "The Lost Sister",
+      "file": "assets/portraits/boss_akari_portrait.webp",
+      "weapon": "Eclipse Blades",
+      "combatStyle": "Unmasked younger sister combining agile family martial arts with adaptive shadow evasions."
+    },
+    {
+      "level": 11,
+      "id": "nami",
+      "name": "Nami",
+      "title": "The Drowned Oracle",
+      "file": "assets/portraits/boss_nami_portrait.webp",
+      "weapon": "Tidal Blades",
+      "combatStyle": "Flowing delayed strikes with deceptive rhythm, wave-like recovery cancels, and water bursts."
+    },
+    {
+      "level": 12,
+      "id": "kurogane",
+      "name": "Lord Kurogane",
+      "title": "The False Shogun",
+      "file": "assets/portraits/boss_kurogane_portrait.webp",
+      "weapon": "Obsidian Katana",
+      "combatStyle": "Imperious samurai lord with high-speed iaijutsu draws, impenetrable guard, and heavy counter-slashes."
+    },
+    {
+      "level": 13,
+      "id": "hollow_knight",
+      "name": "The Hollow Knight",
+      "title": "The Sealbreaker",
+      "file": "assets/portraits/boss_hollow_knight_portrait.webp",
+      "weapon": "Void Blade",
+      "combatStyle": "Supernatural spectral entity unleashing telegraphed void shockwaves and telekinetic blade strikes."
+    },
+    {
+      "level": 14,
+      "id": "hollow_king",
+      "name": "The Hollow King",
+      "title": "The Eternal Tyrant",
+      "file": "assets/portraits/boss_hollow_king_portrait.webp",
+      "weapon": "Nightfall Essence",
+      "combatStyle": "Two-phase apocalyptic sovereign: royal dominance in Phase 1, berserk shadow tendrils in Phase 2."
+    },
+    {
+      "level": 15,
+      "id": "titan",
+      "name": "Titan",
+      "title": "The Ancient Overlord",
+      "file": "assets/portraits/boss_titan_portrait.webp",
+      "weapon": "Titan's Desolator",
+      "combatStyle": "Colossal cybernetic warlord wielding the catastrophic Desolator cleaver with unstoppable momentum."
+    }
+  ],
+  "rewards": [
+    { "level": 1, "id": "iron_katana", "name": "Iron Katana", "type": "weapon", "file": "assets/weapons/weapon_iron_katana.webp" },
+    { "level": 2, "id": "twin_daggers", "name": "Twin Daggers", "type": "weapon", "file": "assets/weapons/weapon_twin_daggers.webp" },
+    { "level": 3, "id": "crimson_guard", "name": "Crimson Guard", "type": "accessory", "file": "assets/weapons/weapon_crimson_guard.webp" },
+    { "level": 4, "id": "chain_blade", "name": "Chain Blade", "type": "weapon", "file": "assets/weapons/weapon_chain_blade.webp" },
+    { "level": 5, "id": "ember_katana", "name": "Ember Katana", "type": "weapon", "file": "assets/weapons/weapon_ember_katana.webp" },
+    { "level": 6, "id": "storm_spear", "name": "Storm Spear", "type": "weapon", "file": "assets/weapons/weapon_storm_spear.webp" },
+    { "level": 7, "id": "azure_blades", "name": "Azure Blades", "type": "weapon", "file": "assets/weapons/weapon_azure_blades.webp" },
+    { "level": 8, "id": "phantom_daggers", "name": "Phantom Daggers", "type": "weapon", "file": "assets/weapons/weapon_phantom_daggers.webp" },
+    { "level": 9, "id": "heavy_cleaver", "name": "Heavy Cleaver", "type": "weapon", "file": "assets/weapons/weapon_heavy_cleaver.webp" },
+    { "level": 10, "id": "eclipse_technique", "name": "Eclipse Technique", "type": "technique", "file": "assets/weapons/weapon_eclipse_technique.webp" },
+    { "level": 11, "id": "tidal_blades", "name": "Tidal Blades", "type": "weapon", "file": "assets/weapons/weapon_tidal_blades.webp" },
+    { "level": 12, "id": "obsidian_armor", "name": "Obsidian Armor", "type": "accessory", "file": "assets/weapons/weapon_obsidian_armor.webp" },
+    { "level": 13, "id": "void_counter", "name": "Void Counter", "type": "technique", "file": "assets/weapons/weapon_void_counter.webp" },
+    { "level": 14, "id": "nightfall_awakened", "name": "Awakened Nightfall", "type": "weapon", "file": "assets/weapons/weapon_nightfall_awakened.webp" },
+    { "level": 15, "id": "titan_desolator", "name": "Titan's Desolator", "type": "weapon", "file": "assets/weapons/weapon_titan_desolator.webp" }
+  ],
+  "endings": [
+    { "id": "TRUE_RONIN", "title": "True Ronin", "file": "assets/ui/ending_true_ronin.webp", "desc": "Kaze shatters the cursed blade Nightfall, freeing every stolen shadow to the winds and vanishing as a mortal ronin." },
+    { "id": "ETERNAL_SHADOW", "title": "Eternal Shadow", "file": "assets/ui/ending_eternal_shadow.webp", "desc": "Kaze claims the Hollow King's throne, absorbing all dark seals to become the immortal Sovereign of Shadows." },
+    { "id": "BROKEN_SEAL", "title": "Broken Seal", "file": "assets/ui/ending_broken_seal.webp", "desc": "Kaze binds his own soul to the rift, permanently sealing the Hollow realm at the cost of his mortal existence." }
+  ]
+}

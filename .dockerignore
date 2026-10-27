@@ -1,0 +1,8 @@
+.git
+.gitignore
+.vscode
+bin
+target
+env imgs
+scratch
+*.log

@@ -1,0 +1,27 @@
+# Compiled binaries and build outputs
+target/
+bin/
+*.class
+
+# Temporary scratch and raw environment images
+scratch/
+env imgs/
+
+# IDE and Editor files
+.vscode/
+.idea/
+*.iml
+*.iws
+*.ipr
+.project
+.classpath
+.settings/
+
+# Logs and runtime files
+*.log
+data/shadow_reborn_save.json
+
+# Operating System files
+.DS_Store
+Thumbs.db
+desktop.ini

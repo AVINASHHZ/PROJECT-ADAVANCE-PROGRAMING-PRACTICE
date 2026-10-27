@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: shadow-reborn
+    runtime: docker
+    region: singapore
+    plan: free
+    branch: main
+    healthCheckPath: /api/profile
+    envVars:
+      - key: PORT
+        value: 8080

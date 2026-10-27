@@ -1,0 +1,60 @@
+package com.shadowreborn.model;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import java.io.Serializable;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class MatchCompleteRequest implements Serializable {
+    private static final long serialVersionUID = 1L;
+
+    private String matchId;
+    private String winner;
+    private int playerRoundsWon;
+    private int opponentRoundsWon;
+    private String weaponUsed;
+    private int aiDifficulty;
+    private String arena;
+    private int maxCombo;
+    private int parriesLanded;
+    private int shadowArtsUsed;
+    private int remainingHp;
+    private int durationSeconds;
+
+    public MatchCompleteRequest() {}
+
+    public String getMatchId() { return matchId; }
+    public void setMatchId(String matchId) { this.matchId = matchId; }
+
+    public String getWinner() { return winner; }
+    public void setWinner(String winner) { this.winner = winner; }
+
+    public int getPlayerRoundsWon() { return playerRoundsWon; }
+    public void setPlayerRoundsWon(int playerRoundsWon) { this.playerRoundsWon = playerRoundsWon; }
+
+    public int getOpponentRoundsWon() { return opponentRoundsWon; }
+    public void setOpponentRoundsWon(int opponentRoundsWon) { this.opponentRoundsWon = opponentRoundsWon; }
+
+    public String getWeaponUsed() { return weaponUsed; }
+    public void setWeaponUsed(String weaponUsed) { this.weaponUsed = weaponUsed; }
+
+    public int getAiDifficulty() { return aiDifficulty; }
+    public void setAiDifficulty(int aiDifficulty) { this.aiDifficulty = aiDifficulty; }
+
+    public String getArena() { return arena; }
+    public void setArena(String arena) { this.arena = arena; }
+
+    public int getMaxCombo() { return maxCombo; }
+    public void setMaxCombo(int maxCombo) { this.maxCombo = maxCombo; }
+
+    public int getParriesLanded() { return parriesLanded; }
+    public void setParriesLanded(int parriesLanded) { this.parriesLanded = parriesLanded; }
+
+    public int getShadowArtsUsed() { return shadowArtsUsed; }
+    public void setShadowArtsUsed(int shadowArtsUsed) { this.shadowArtsUsed = shadowArtsUsed; }
+
+    public int getRemainingHp() { return remainingHp; }
+    public void setRemainingHp(int remainingHp) { this.remainingHp = remainingHp; }
+
+    public int getDurationSeconds() { return durationSeconds; }
+    public void setDurationSeconds(int durationSeconds) { this.durationSeconds = durationSeconds; }
+}
